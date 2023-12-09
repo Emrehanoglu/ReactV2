@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react"
 import './App.css';
+import MemoryCard from "./components/MemoryCard";
 
 /* card lara tıkladığımda göronecek olan görselleri tutan bir dizi */
 const cardList = [
@@ -16,7 +17,13 @@ function App() {
   const [cards,setCards] = useState([])
 
   const prepareCards = () => {
-    setCards([...cardList,...cardList]) 
+    const sortedCards = [...cardList,...cardList]
+    .sort(() => 0.5 - Math.random()) 
+    /* görselleri sıraladım. Burada gorseller sayısal veya alfabetik bir türde olmadığı obje türünde olduğu için
+    bu sekılde bir metot ile sıralamıs oldum. */
+    .map((card) => ({...card, id:Math.random()}))
+    /* map komutu ile de her cardın yanında o card'a ait bir id degeri türettim */
+    setCards(sortedCards) 
     /* cardList içerisindekileri cards içerisine set ettim */
     /* resimlerden 2 ser tane olması gerektiği için iki defa ...cardList 'i set ettim */
   }
@@ -28,15 +35,12 @@ function App() {
   return (
     <div className="container">
       <h1>Memory App</h1>
-      <button>Oyunu Baslat</button>
+      <button onClick={prepareCards}>Oyunu Baslat</button>
 
       <div className="card-grid">
         {
           cards.map(card => (
-            <div className="card">
-              <img className="cardFront" src={card.path} alt="" /> {/* resmin acıldığı zamanki görseli */}
-              <img className="cardBack" src="img/cover.jpeg" alt="" /> {/* resmin kapak resmi olacak */}
-            </div>
+              <MemoryCard card={card} key={card.id}/>
           ))
         }
       </div>
