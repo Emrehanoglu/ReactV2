@@ -1,1 +1,19 @@
-/*  */
+.container {
+    max-width: 800px;
+    margin: 10px auto; 
+    /* 
+       üstten alttan 10px bosluk 
+       sağdan soldan ortala
+    */
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* her satırda 4 olacak */
+    gap: 10px; /* cardlar arasında 10px lik bosluk */
+    margin-top: 10px;
+}
+
+.card img {
+    width: 100%;
+}
