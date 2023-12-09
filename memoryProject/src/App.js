@@ -16,6 +16,7 @@ function App() {
   const [cards,setCards] = useState([]) /* cards içeriği baslangıcta bos set edilsin. */
   const [selectedOne,setSelectedOne] = useState(null) /* 1. secım. Baslangıcta secili kart yok o yuzden null olsun */
   const [selectedTwo,setSelectedTwo] = useState(null) /* 2. secım. Baslangıcta secili kart yok o yuzden null olsun */
+  const [disabled,setDisabled] = useState(false) /* disabled false olduğunda kullanıcı arayüzden card secimi yapabilecek true olduğunda yapamayacak */
 
   const prepareCards = () => {
     const sortedCards = [...cardList,...cardList]
@@ -39,6 +40,12 @@ function App() {
     prepareCards() /* uygulama ayağa kalktığında cards içerisi set edilecek */
   },[]) /* köseli parantez ile uygulama ilk cağırıldığında calısacak demiş oldum */
 
+  useEffect(() => {
+    if(selectedOne && selectedTwo){
+      setDisabled(true) /* kullanıcı true olduğunda secım yapamayacak */
+    }
+  },[selectedOne,selectedTwo]) /* selectedOne ve selectedTwo objelerine ait bilgiler değiştiğinde calısır.  */
+
   return (
     <div className="container">
       <h1>Memory App</h1>
@@ -47,7 +54,7 @@ function App() {
       <div className="card-grid">
         {
           cards.map(card => (
-              <MemoryCard card={card} key={card.id} handleSelected={handleSelected}/>
+              <MemoryCard card={card} key={card.id} handleSelected={handleSelected} disabled={disabled}/>
           ))
         }
       </div>
