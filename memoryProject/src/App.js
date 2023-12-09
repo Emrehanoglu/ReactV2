@@ -4,12 +4,12 @@ import MemoryCard from "./components/MemoryCard";
 
 /* card lara tıkladığımda göronecek olan görselleri tutan bir dizi */
 const cardList = [
-  { "path": "/img/1.jpeg"},
-  { "path": "/img/2.jpeg"},
-  { "path": "/img/3.jpeg"},
-  { "path": "/img/4.jpeg"},
-  { "path": "/img/5.jpeg"},
-  { "path": "/img/6.jpeg"},
+  { "path": "/img/1.jpeg", matched: false},
+  { "path": "/img/2.jpeg", matched: false},
+  { "path": "/img/3.jpeg", matched: false},
+  { "path": "/img/4.jpeg", matched: false},
+  { "path": "/img/5.jpeg", matched: false},
+  { "path": "/img/6.jpeg", matched: false},
 ]
 
 function App() {
@@ -43,9 +43,30 @@ function App() {
   useEffect(() => {
     if(selectedOne && selectedTwo){
       setDisabled(true) /* kullanıcı true olduğunda secım yapamayacak */
+      if(selectedOne.path === selectedTwo.path){
+        setCards(prevCards => {
+          return prevCards.map(card => {
+            if(card.path === selectedOne.path){
+              return{...card,matched: true}
+            } else{
+              return card
+            }
+          })
+        })
+        resetState()
+      }else{
+        setTimeout(()=> {
+          resetState()
+        },1000)
+      }
     }
   },[selectedOne,selectedTwo]) /* selectedOne ve selectedTwo objelerine ait bilgiler değiştiğinde calısır.  */
 
+  const resetState = () => {
+      setSelectedOne(null)
+      setSelectedTwo(null)
+      setDisabled(false)
+  }
   return (
     <div className="container">
       <h1>Memory App</h1>
