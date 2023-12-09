@@ -13,8 +13,9 @@ const cardList = [
 ]
 
 function App() {
-  /* cards içeriği baslangıcta bos set edilsin. */
-  const [cards,setCards] = useState([])
+  const [cards,setCards] = useState([]) /* cards içeriği baslangıcta bos set edilsin. */
+  const [selectedOne,setSelectedOne] = useState(null) /* 1. secım. Baslangıcta secili kart yok o yuzden null olsun */
+  const [selectedTwo,setSelectedTwo] = useState(null) /* 2. secım. Baslangıcta secili kart yok o yuzden null olsun */
 
   const prepareCards = () => {
     const sortedCards = [...cardList,...cardList]
@@ -26,6 +27,12 @@ function App() {
     setCards(sortedCards) 
     /* cardList içerisindekileri cards içerisine set ettim */
     /* resimlerden 2 ser tane olması gerektiği için iki defa ...cardList 'i set ettim */
+    setSelectedOne(null) /* baslangıcta 1. secim null olsun */
+    setSelectedTwo(null) /* baslangıcta 2. secim null olsun */
+  }
+
+  const handleSelected = (card) => {
+    selectedOne ? setSelectedTwo(card) : setSelectedOne(card)
   }
 
   useEffect(() => {
@@ -40,7 +47,7 @@ function App() {
       <div className="card-grid">
         {
           cards.map(card => (
-              <MemoryCard card={card} key={card.id}/>
+              <MemoryCard card={card} key={card.id} handleSelected={handleSelected}/>
           ))
         }
       </div>
