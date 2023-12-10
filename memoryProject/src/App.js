@@ -17,6 +17,7 @@ function App() {
   const [selectedOne,setSelectedOne] = useState(null) /* 1. secım. Baslangıcta secili kart yok o yuzden null olsun */
   const [selectedTwo,setSelectedTwo] = useState(null) /* 2. secım. Baslangıcta secili kart yok o yuzden null olsun */
   const [disabled,setDisabled] = useState(false) /* disabled false olduğunda kullanıcı arayüzden card secimi yapabilecek true olduğunda yapamayacak */
+  const [score,setScore] = useState(0)
 
   const prepareCards = () => {
     const sortedCards = [...cardList,...cardList]
@@ -30,6 +31,7 @@ function App() {
     /* resimlerden 2 ser tane olması gerektiği için iki defa ...cardList 'i set ettim */
     setSelectedOne(null) /* baslangıcta 1. secim null olsun */
     setSelectedTwo(null) /* baslangıcta 2. secim null olsun */
+    setScore(0)
   }
 
   const handleSelected = (card) => {
@@ -66,12 +68,13 @@ function App() {
       setSelectedOne(null)
       setSelectedTwo(null)
       setDisabled(false)
+      setScore(prevScore => prevScore + 1)
   }
   return (
     <div className="container">
       <h1>Memory App</h1>
       <button onClick={prepareCards}>Oyunu Baslat</button>
-
+      <p>{score}</p>
       <div className="card-grid">
         {
           cards.map(card => (
