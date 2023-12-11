@@ -35,7 +35,7 @@ function App() {
   }
 
   const handleSelected = (card) => {
-    selectedOne ? setSelectedTwo(card) : setSelectedOne(card)
+    selectedOne ? setSelectedTwo(card) : setSelectedOne(card) 
   }
 
   useEffect(() => {
