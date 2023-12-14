@@ -3,8 +3,15 @@ export const Contact = () => {
         <div className="contact">
             <h3>İletişim</h3>
             <form>
-                <input type="text" />
-                <button type="submit">Gönder</button>
+                <div>
+                    <label htmlFor="email">Email</label>
+                    <input type="email" name="email"/>
+                </div>
+                <div>
+                    <label htmlFor="message">Message</label>
+                    <textarea name="message"></textarea>
+                </div>
+                <button>Submit</button>
             </form>
         </div>
     )

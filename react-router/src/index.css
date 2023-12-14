@@ -1,3 +1,107 @@
-.active {
-    color: red;
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css);
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+
+:root {
+    --primary: #feb236;
+    --secondary: #6b5b95;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    padding: 20px;
+    background: var(--secondary);
+}
+
+header {
+    display: flex; /* elemanları yan yana getirir */
+    justify-content: space-between; /* aralarında eşit boşluk bırakır */
+    align-items: center; /* dikeyde ortalar */
+}
+
+header h1 {
+    padding-bottom: 5px; /* alttan 5px lik bosluk daha verir */
+    border-bottom: 3px solid var(--primary); /* alttan 3px lik çizgi */
+}
+
+header nav a { /* NavLink ler a tag i olarak alındı */
+    text-decoration: none; /* linklerin altındaki çizgileri siler */
+    padding: 6px;
+    border-radius: 4px;
+}
+
+nav a.active { /* NavLink 'e tıklayınca a etiketli ve içerisinde active class lı gelir */
+    background: var(--primary);
+}
+
+p {
+    margin: 20px 0; /* alttan üstten 20px, sağdan soldan 0px lik bosluklar bırakır */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto; /* alttan üstten 40px bosluk bırakır, sağdan soldan ortalar */
+}
+
+main {
+    padding: 20px;
+    border-radius: 10px;
+    background: rgb(0, 0, 0, 0.2); /* arka planı saydam yapar */
+}
+
+.help-layout nav{
+    display: flex; /* elemanlar yan yana gelir */
+    justify-content: flex-start; /* elemanlar satırın solunda konumlanır */
+    gap: 10px; /* aralarında bosluk olsun */
+    margin: 20px 0;
+}
+
+.help-layout nav a {
+    border: 1px solid #fff;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 20px 0;
+    text-decoration: none;
+}
+
+.faq .question {
+    background: rgb(0, 0, 0, 0.3);
+    padding: 15px 30px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+form {
+    margin-top: 25px;
+}
+
+form input, form label, form textarea {
+    display: block; /* form tag 'inin altındaki elemanlar alt alta gelir */
+}
+
+form input,  form textarea {
+    margin-bottom: 30px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 0; /* default olarak gelen border 'ları kapatır */
+    width: 300px;
+}
+
+form label {
+    margin-bottom: 10px;
+}
+
+form button {
+    border: 0;
+    padding: 10px;
+    border-radius: 4px;
+    color: #fff;
+    background: var(--primary);
+    cursor: pointer;
 }
