@@ -7,6 +7,7 @@ import {Contact} from './pages/help/Contact'
 
 import { MainLayout } from './layout/MainLayout';
 import { HelpLayout } from './layout/HelpLayout';
+import { Users, userLoader } from './pages/Users'
 
 const router = createBrowserRouter([
   { 
@@ -23,7 +24,9 @@ const router = createBrowserRouter([
           {path: "contact", element: <Contact />},
           {path: "faq", element: <Faq />}
         ]
-      }
+      },
+      {path: 'users' , element: <Users />, loader: userLoader} 
+      /* users linkine gidildiği anda usersLoader ile servis üzerinden alınan bilgiler de gelir*/
     ]}
 ])
 

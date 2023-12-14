@@ -105,3 +105,18 @@ form button {
     background: var(--primary);
     cursor: pointer;
 }
+
+/* users */
+.users .card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    background-color: var(--secondary);
+    padding: 10px;
+    margin-bottom: 10px;
+} 
+
+.users .card a {
+    font-size: 30px;
+}
