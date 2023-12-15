@@ -120,3 +120,29 @@ form button {
 .users .card a {
     font-size: 30px;
 }
+
+/* user details */
+
+.user-details {
+    padding: 10px;
+    border-radius: 5px;
+    background: rgb(0 , 0 , 0, 0.1);
+}
+
+.user-details ul {
+    padding: 30px;
+}
+
+.user-details a {
+    text-decoration: none;
+    border: 2px solid#fff;
+    border-radius: 4px;
+    padding: 3px;
+    background: var(--primary);
+}
+
+/* error */
+
+.error {
+    color: red;
+}
