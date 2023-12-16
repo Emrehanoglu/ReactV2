@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import "./Home.css"
 import ProductCard from '../../components/ProductCard'
+import useFetch from '../../hoooks/useFetch'
 
 function Home() {
-
-  const [tarifler, setTarifler] = useState(null)
+  /* const [tarifler, setTarifler] = useState(null)
 
   useEffect(() => {
     fetch('http://localhost:3000/tarifler')
     .then(res => res.json())
     .then(data => setTarifler(data))
-  }, []) /* componentDidMount */
+  }, []) */
+
+  const {data : tarifler} = useFetch('http://localhost:3000/tarifler')
 
   return (
     <div className="row mt-3">

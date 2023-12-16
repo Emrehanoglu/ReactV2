@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import "./Details.css"
 import { useParams } from 'react-router-dom'
+import useFetch from '../../hoooks/useFetch'
 
 function Details() {
   const { id } = useParams()
-  const [tarif, setTarif] = useState(null)
 
-  const url = 'http://localhost:3000/tarifler/' + id
-  useEffect(() => {
-    fetch(url).then(res => res.json()).then(data => setTarif(data))
-  },[url]) /* url değişir ise tekrar servise gider ve ürün getirir */
+  /* const [tarif, setTarif] = useState(null)
+  const url = 'http://localhost:3000/tarifler/' + id */
+  
+  const {data : tarif} = useFetch('http://localhost:3000/tarifler/' + id)
 
   return (
     <div className="row mt-3">
