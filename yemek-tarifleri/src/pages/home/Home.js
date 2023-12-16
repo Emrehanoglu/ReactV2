@@ -12,10 +12,13 @@ function Home() {
     .then(data => setTarifler(data))
   }, []) */
 
-  const {data : tarifler} = useFetch('http://localhost:3000/tarifler')
+  const {data : tarifler, isLoading} = useFetch('http://localhost:3000/tarifler')
 
   return (
     <div className="row mt-3">
+      {
+        isLoading && <div className="alert alert-warning">Yükleniyor...</div>
+      }
       {
         tarifler && tarifler.map(tarif => (
           <ProductCard key={tarif.id} tarif={tarif} />

@@ -9,10 +9,11 @@ function Details() {
   /* const [tarif, setTarif] = useState(null)
   const url = 'http://localhost:3000/tarifler/' + id */
   
-  const {data : tarif} = useFetch('http://localhost:3000/tarifler/' + id)
+  const {data : tarif, isLoading} = useFetch('http://localhost:3000/tarifler/' + id)
 
   return (
     <div className="row mt-3">
+      {isLoading && <div className="alert alert-warning">Yükleniyor...</div>}
       {
         tarif && ( 
         /* tarif bilgisi var ise html ler ekrana gelecek bu kontrolü yapmazsam

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 
 const useFetch = (url) => {
     const [data, setData] = useState(null)
+    const [isLoading, setisLoading] = useState(false) /* loading icon hide */
 
     useEffect(() => {
         /* promise yöntemi */
@@ -9,16 +10,21 @@ const useFetch = (url) => {
 
         /* async - await yöntemi */
         const fetchData = async () => {
+            setisLoading(true) /* loading icon show */
             const res = await fetch(url)
-            const data = res.json()
-            setData(data)
+            const data = await res.json()
+            
+            setTimeout(() => {
+                setisLoading(false) /* loading icon hide */
+                setData(data)
+            },1000)
         }
 
         fetchData()
 
     },[url])
 
-    return {data}
+    return {data, isLoading}
 }
 
 export default useFetch
