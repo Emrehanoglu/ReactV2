@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./Create.css"
 import useFetch from '../../hooks/useFetch'
+import { useNavigate } from 'react-router-dom'
 
 function Create() {
   const [baslik, setBaslik] = useState('')
@@ -11,13 +12,20 @@ function Create() {
   const [malzeme, setMalzeme] = useState('')
   const [malzemeler, setMalzemeler] = useState([])
   const malzemeInput = useRef(null) /* malzeme inputu üzerinde işlemler yapabilmek için */
+  const navigate = useNavigate()
   
-  const {postData} = useFetch('http://localhost:3000/tarifler',"POST")
+  const {postData, data} = useFetch('http://localhost:3000/tarifler',"POST")
 
   const handleSubmit = (e) => {
     e.preventDefault()
     postData({baslik, aciklama, malzemeler, hazirlanisi, resim, url})
   }
+
+  useEffect(() => {
+    if(data){
+      navigate('/')
+    }
+  },[data,navigate])
 
   const handleAddMalzeme = (e) => {
     e.preventDefault()
