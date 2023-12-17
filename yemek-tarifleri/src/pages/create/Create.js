@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import "./Create.css"
+import useFetch from '../../hooks/useFetch'
 
 function Create() {
   const [baslik, setBaslik] = useState('')
@@ -10,10 +11,12 @@ function Create() {
   const [malzeme, setMalzeme] = useState('')
   const [malzemeler, setMalzemeler] = useState([])
   const malzemeInput = useRef(null) /* malzeme inputu üzerinde işlemler yapabilmek için */
+  
+  const {postData} = useFetch('http://localhost:3000/tarifler',"POST")
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(baslik, aciklama, hazirlanisi, resim, url)
+    postData({baslik, aciklama, malzemeler, hazirlanisi, resim, url})
   }
 
   const handleAddMalzeme = (e) => {

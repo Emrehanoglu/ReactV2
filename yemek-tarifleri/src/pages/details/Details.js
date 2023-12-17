@@ -1,7 +1,7 @@
 import React from 'react'
 import "./Details.css"
 import { useParams } from 'react-router-dom'
-import useFetch from '../../hoooks/useFetch'
+import useFetch from '../../hooks/useFetch'
 
 function Details() {
   const { id } = useParams()

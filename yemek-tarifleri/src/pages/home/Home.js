@@ -1,7 +1,7 @@
 import React from 'react'
 import "./Home.css"
 import ProductCard from '../../components/ProductCard'
-import useFetch from '../../hoooks/useFetch'
+import useFetch from '../../hooks/useFetch'
 
 function Home() {
   /* const [tarifler, setTarifler] = useState(null)
