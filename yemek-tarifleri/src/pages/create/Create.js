@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import "./Create.css"
 
 function Create() {
@@ -7,11 +7,25 @@ function Create() {
   const [hazirlanisi, setHazirlanisi] = useState('')
   const [resim, setResim] = useState('')
   const [url, setUrl] = useState('')
+  const [malzeme, setMalzeme] = useState('')
+  const [malzemeler, setMalzemeler] = useState([])
+  const malzemeInput = useRef(null) /* malzeme inputu üzerinde işlemler yapabilmek için */
 
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(baslik, aciklama, hazirlanisi, resim, url)
   }
+
+  const handleAddMalzeme = (e) => {
+    e.preventDefault()
+    const item = malzeme.trim()
+    if(item && !malzemeler.includes(item)){
+      setMalzemeler(prevItems => [...prevItems, item])
+    }
+    setMalzeme('')
+    malzemeInput.current.value = "" /* ekleme işleminden sonra input içerisini temizler */
+    malzemeInput.current.focus() /* ekleme işleminden sonra input içerisinde yazmaya devam edilebilir */
+  } 
 
   return (
     <div className="card mt-3">
@@ -25,6 +39,15 @@ function Create() {
           <div className="mb-3">
             <label htmlFor="aciklama" className='form-label'>Açıklama</label>
             <input type="text" name="aciklama" id="aciklama" className='form-control' onChange={(e) => setAciklama(e.target.value)} />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="malzemeler" className='form-label'>Malzemeler 
+            <ul>{malzemeler.map(malzeme => <li key={malzeme}>{malzeme}</li>)}</ul></label>            
+            <div className="input-group">
+              <input type="text" ref={malzemeInput} name='malzeme' className='form-control' onChange={(e) => setMalzeme(e.target.value)}/>
+              <button className='btn btn-primary' type='submit' onClick={handleAddMalzeme}>+</button>
+            </div>
+            {/* ref={malzemeInput} ile inputu ilişkilendirdim */}
           </div>
           <div className="mb-3">
             <label htmlFor="hazirlanisi" className='form-label'>Hazırlanışı</label>
