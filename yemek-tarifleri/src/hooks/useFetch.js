@@ -26,8 +26,10 @@ const useFetch = (url, method="GET") => {
                     throw new Error(res.statusText);
                 }
                 const data = await res.json();
-                setIsLoading(false);
-                setData(data);
+                setTimeout(() => {
+                    setIsLoading(false);
+                    setData(data);
+                },500)
             }
             catch(err) {
                 setIsLoading(false);
