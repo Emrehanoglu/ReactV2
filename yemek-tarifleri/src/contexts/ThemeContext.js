@@ -6,7 +6,10 @@ export const ThemeContext = createContext()
 export function ThemeProvider({children}){
     /* const [color, setColor] = useState('success') */
 
-    const [state, dispatch] = useReducer(themeReducer)
+    const [state, dispatch] = useReducer(themeReducer, {
+        color: 'warning',
+        mode: 'dark'
+    })
 
     const changeColor = (value) => {
         /* setColor(value) */
