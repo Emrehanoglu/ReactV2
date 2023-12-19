@@ -26,6 +26,15 @@ const removeBlog = ({ id }) => (
         id: id
     }
 )
+//action creator - edit
+const editBlog = ({ id, updates }) => (
+    {
+        /* burası action bilgisi */
+        type: "EDIT_BLOG",
+        id: id,
+        updates: updates
+    }
+)
 
 const blogState = [] /* başlangıç değeri */
 
@@ -39,6 +48,16 @@ const blogReducer = (state = blogState, action) => {
         case "REMOVE_BLOG":
             return state.filter(({ id }) => {
                 return id !== action.id; 
+            })
+        case "EDIT_BLOG":
+            return state.map((blog) => {
+                if(blog.id === action.id){
+                    return {
+                        ...state, ...action.updates
+                    }
+                }else{
+                    return blog
+                }
             })
         default:
             return state
@@ -65,10 +84,15 @@ store.subscribe(() => {
     console.log(store.getState())
 })
 
+/* add */
 const blog1 = store.dispatch(addBlog({title:'blog title 1', description:'blog description 1'}))
 const blog2 = store.dispatch(addBlog({title:'blog title 2', description:'blog description 2'}))
 
+/* remove */
 store.dispatch(removeBlog({ id: blog1.blog.id }))
+
+/* edit */
+store.dispatch(editBlog({ id: blog2.blog.id , updates:{title:"update blog title 2"}}))
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<AppRouter />); 
