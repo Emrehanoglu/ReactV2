@@ -6,16 +6,26 @@ import "./App.css"
 import { createStore, combineReducers } from 'redux';
 import {v4 as uuid} from 'uuid';
 
-//action creator
-const addBlog = ({title='', description='',dateAdded=0}) => ({
-    type: "ADD_BLOG",
-    blog: {
-        id: uuid(),
-        title: title,
-        description: description,
-        dateAdded: dateAdded
+//action creator - remove
+const addBlog = ({title='', description='',dateAdded=0}) => (
+    {
+        /* burası action bilgisi */
+        type: "ADD_BLOG",
+        blog: {
+            id: uuid(),
+            title: title,
+            description: description,
+            dateAdded: dateAdded
     }
 })
+//action creator - remove
+const removeBlog = ({ id }) => (
+    {
+        /* burası action bilgisi */
+        type: "REMOVE_BLOG",
+        id: id
+    }
+)
 
 const blogState = [] /* başlangıç değeri */
 
@@ -26,6 +36,10 @@ const blogReducer = (state = blogState, action) => {
                 ...state, /* mevcuttaki blog bilgileri */
                 action.blog /* mevcut blog bilgileri + yeni gelen blog  */
             ]
+        case "REMOVE_BLOG":
+            return state.filter(({ id }) => {
+                return id !== action.id; 
+            })
         default:
             return state
     }
@@ -51,9 +65,10 @@ store.subscribe(() => {
     console.log(store.getState())
 })
 
-store.dispatch(addBlog({title:'blog title 1', description:'blog description 1'}))
+const blog1 = store.dispatch(addBlog({title:'blog title 1', description:'blog description 1'}))
+const blog2 = store.dispatch(addBlog({title:'blog title 2', description:'blog description 2'}))
 
-
+store.dispatch(removeBlog({ id: blog1.blog.id }))
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<AppRouter />); 
