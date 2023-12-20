@@ -3,82 +3,10 @@ import ReactDOM from 'react-dom/client';
 import AppRouter from './routers/AppRouter';
 import reportWebVitals from './reportWebVitals';
 import "./App.css"
-import { createStore, combineReducers } from 'redux';
-import {v4 as uuid} from 'uuid';
+import configureStore from './store/configurStore'
+import {addBlog, removeBlog, editBlog} from './actions/blogs'
 
-//action creator - remove
-const addBlog = ({title='', description='',dateAdded=0}) => (
-    {
-        /* burası action bilgisi */
-        type: "ADD_BLOG",
-        blog: {
-            id: uuid(),
-            title: title,
-            description: description,
-            dateAdded: dateAdded
-    }
-})
-//action creator - remove
-const removeBlog = ({ id }) => (
-    {
-        /* burası action bilgisi */
-        type: "REMOVE_BLOG",
-        id: id
-    }
-)
-//action creator - edit
-const editBlog = ({ id, updates }) => (
-    {
-        /* burası action bilgisi */
-        type: "EDIT_BLOG",
-        id: id,
-        updates: updates
-    }
-)
-
-const blogState = [] /* başlangıç değeri */
-
-const blogReducer = (state = blogState, action) => {
-    switch (action.type){
-        case "ADD_BLOG":
-            return [
-                ...state, /* mevcuttaki blog bilgileri */
-                action.blog /* mevcut blog bilgileri + yeni gelen blog  */
-            ]
-        case "REMOVE_BLOG":
-            return state.filter(({ id }) => {
-                return id !== action.id; 
-            })
-        case "EDIT_BLOG":
-            return state.map((blog) => {
-                if(blog.id === action.id){
-                    return {
-                        ...state, ...action.updates
-                    }
-                }else{
-                    return blog
-                }
-            })
-        default:
-            return state
-    }
-}
-
-const authState = {} /* başlangıç değeri */
-
-const authReducer = (state = authState, action) => {
-    switch (action.type){
-        default:
-            return state
-    }
-}
-
-const store = createStore(
-    combineReducers({
-        blogs: blogReducer,
-        auth: authReducer
-    })
-)
+const store = configureStore()
 
 store.subscribe(() => {
     console.log(store.getState())
