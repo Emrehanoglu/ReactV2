@@ -6,4 +6,12 @@ const BlogDetailsPage = ({match}) => {
   )
 }
 
+const mapStateToProps = (state,props) => {
+  return {
+    blog: state.blogs.find((blog)=> {
+      return blog.id === state.match.params.id
+    })
+  }
+}
+
 export default BlogDetailsPage
