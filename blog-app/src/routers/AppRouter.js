@@ -7,6 +7,7 @@ import BlogDetailsPage from '../components/BlogDetailsPage'
 import ContactPage from '../components/ContactPage'
 import NotFoundPage from '../components/NotFoundPage'
 import AddBlogPage from '../components/AddBlogPage'
+import EditBlogPage from '../components/EditBlogPage';
 
 const AppRouter = () => {
   return (
@@ -22,6 +23,7 @@ const AppRouter = () => {
               {/* exact' i burada da verdim cunku /blogs gorulduğu an BlogListPage' e gidiyor,
               /blogs/:id 'ye gidebilmesi için exact eklenmiş oldu */}
               <Route path='/create' component={ AddBlogPage }></Route>
+              <Route path='/edit/:id' component={ EditBlogPage }></Route>
               <Route path="/blogs/:id" component={BlogDetailsPage}></Route>
               <Route path="/contact" component={ContactPage}></Route>
               <Route component={NotFoundPage}></Route>
