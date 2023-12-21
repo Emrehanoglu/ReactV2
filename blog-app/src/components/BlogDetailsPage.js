@@ -4,7 +4,7 @@ import BlogDetailsItem from './BlogDetailsItem'
 
 const BlogDetailsPage = (props) => {
   return (
-    <BlogDetailsItem {...props.blog}  />
+    <BlogDetailsItem blog={props.blog}  />
   )
 }
 

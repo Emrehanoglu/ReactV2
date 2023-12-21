@@ -1,13 +1,14 @@
 import React from 'react'
 
-const BlogDetailsItem = ({id,title,description}) => {
+const BlogDetailsItem = (props) => {
   return (
     <div>
-        <p>
-            blog id: {id}
-            blog title: {title}
-            blog decsription: {description}
-        </p>
+      Blog Details Item Page
+        <ul>
+            <li>blog id: {props.blog.id}</li>
+            <li>blog title: {props.blog.title}</li>
+            <li>blog decsription: {props.blog.description}</li>
+          </ul>
     </div>
   )
 }
